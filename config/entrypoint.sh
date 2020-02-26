@@ -8,12 +8,17 @@ echo "/bin/false" >> /etc/shells
 # vsftpd settings
 echo "$USERNAME" >> /etc/vsftpd.allowed_users
 
-# qBittorrent settings
-echo "Downloads\SavePath=/home/$USERNAME/" >> /root/.config/qBittorrent/qBittorrent.conf
-echo "Downloads\TempPath=/home/$USERNAME/tmp/" >> /root/.config/qBittorrent/qBittorrent.conf
+## transmission settings
+sed -i 's%  "incomplete-dir": "",%  "incomplete-dir": "/home/'"$USERNAME"'/tmp/",%g' /root/.config/transmission-daemon/settings.json
+sed -i 's%  "download-dir": "",%  "download-dir": "/home/'"$USERNAME"'/",%g' /root/.config/transmission-daemon/settings.json
+sed -i 's%  "rpc-username": "",%  "rpc-username": "'"$USERNAME"'",%g' /root/.config/transmission-daemon/settings.json
+sed -i 's%  "rpc-password": "",%  "rpc-password": "'"$PASSWORD"'",%g' /root/.config/transmission-daemon/settings.json
 
 # start vsftpd
 service vsftpd start
 
-# start qBittorrent
-/usr/bin/qbittorrent-nox
+# start transmission
+service transmission-daemon start
+
+# workaround for not stopping
+sleep 3650d

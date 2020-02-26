@@ -1,25 +1,29 @@
 FROM ubuntu:18.04
 
-# environemt variables
-ENV USERNAME=qbt \
-    PASSWORD=qbt
+# default environemt variables
+ENV USERNAME=user \
+    PASSWORD=pass
 
 # common setup
-RUN apt update && \
-    apt install -y software-properties-common
-
-# install qbittorrent-nox
-RUN add-apt-repository ppa:qbittorrent-team/qbittorrent-stable && \
-    apt update && \
-    apt install -y qbittorrent-nox:
+RUN apt-get update && \
+    apt-get install -y software-properties-common
 
 # install vsftpd
-RUN apt install -y vsftpd && \
+RUN apt-get install -y vsftpd && \
     mkdir -p /var/run/vsftpd/empty
+
+# install transmission
+RUN add-apt-repository ppa:transmissionbt/ppa && \
+    apt-get update && \
+    apt-get install -y transmission-cli transmission-common transmission-daemon
+
+RUN cp -R /etc/transmission-daemon /root/.config/ && \
+    sed -i 's%CONFIG_DIR="/var/lib/transmission-daemon/info"%CONFIG_DIR="/root/.config/transmission-daemon"%g' /etc/default/transmission-daemon && \
+    sed -i 's%USER=debian-transmission%USER=root%g' /etc/init.d/transmission-daemon
 
 # config and entrypoint
 COPY config/vsftpd.conf /etc/
-COPY config/qBittorrent.conf /root/.config/qBittorrent/
+COPY config/settings.json /root/.config/transmission-daemon/
 COPY config/entrypoint.sh /usr/sbin/
 RUN chmod +x /usr/sbin/entrypoint.sh
 

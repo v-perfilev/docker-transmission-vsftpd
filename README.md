@@ -1,4 +1,4 @@
-# QBT-VSFTPD
+# Transmission-vsftpd
 
-Docker image with qBitTorrent and VSFTPD as ftp-server.
+Docker image with transmission as torrent client and VSFTPD as ftp-server.
 
