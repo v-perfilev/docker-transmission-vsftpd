@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # create user and to allowed list
 useradd "$USERNAME" -d /home/"$USERNAME" -s /bin/false -m
