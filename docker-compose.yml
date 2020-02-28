@@ -6,9 +6,9 @@ services:
     image: persoff68/transmission-vsftpd
     restart: always
     ports:
-      - 21:21
-      - 21100-21110:21100-21110
-      - 8080:8080
+      - "21:21"
+      - "21100-21110:21100-21110"
+      - "8080:8080"
     environment:
       USERNAME: username
       PASSWORD: password

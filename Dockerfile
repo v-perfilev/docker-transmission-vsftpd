@@ -27,9 +27,9 @@ COPY config/settings.json /root/.config/transmission-daemon/
 COPY config/entrypoint.sh /usr/sbin/
 RUN chmod +x /usr/sbin/entrypoint.sh
 
-EXPOSE 8080
 EXPOSE 21
 EXPOSE 21100-21110
+EXPOSE 8080
 
 # entrypoint
-CMD /usr/sbin/entrypoint.sh
+ENTRYPOINT /usr/sbin/entrypoint.sh

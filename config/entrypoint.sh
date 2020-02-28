@@ -14,11 +14,12 @@ sed -i 's%  "download-dir": "",%  "download-dir": "/home/'"$USERNAME"'/",%g' /ro
 sed -i 's%  "rpc-username": "",%  "rpc-username": "'"$USERNAME"'",%g' /root/.config/transmission-daemon/settings.json
 sed -i 's%  "rpc-password": "",%  "rpc-password": "'"$PASSWORD"'",%g' /root/.config/transmission-daemon/settings.json
 
-# start vsftpd
-service vsftpd start
+set -m
 
 # start transmission
-service transmission-daemon start
+/usr/bin/transmission-daemon &
 
-# workaround for not stopping
-sleep 3650d
+# start vsftpd
+/usr/sbin/vsftpd
+
+fg %1
