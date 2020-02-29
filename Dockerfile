@@ -1,8 +1,8 @@
 FROM ubuntu:18.04
 
 # default environemt variables
-ENV USERNAME=user \
-    PASSWORD=pass
+ENV USERNAME="user" \
+    PASSWORD="pass"
 
 # common setup
 RUN apt-get update && \
