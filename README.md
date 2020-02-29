@@ -1,6 +1,7 @@
 # transmission-vsftpd
 
-Docker image for quick deployment of a seed-box based on Transmission and vsftpd.  
+Docker image for quick deployment of a seed-box based on Transmission and vsftpd.
+Transmission on port 8080 and FTP-server on port 21 are accessible from VPN only.   
 GitLab: https://gitlab.com/persoff68-docker/transmission-vsftpd  
 Docker Hub: https://hub.docker.com/repository/docker/persoff68/transmission-vsftpd
 
